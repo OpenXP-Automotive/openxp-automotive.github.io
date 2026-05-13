@@ -5,73 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login</title>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
 
 body{
+    margin:0;
     height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
     background:#111827;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
 }
 
 .container{
     background:white;
-    width:350px;
     padding:40px;
-    border-radius:14px;
-    box-shadow:0 0 25px rgba(0,0,0,0.4);
+    width:350px;
+    border-radius:12px;
     text-align:center;
-}
-
-h1{
-    margin-bottom:25px;
-    color:#111827;
 }
 
 input{
     width:100%;
-    padding:14px;
-    margin-bottom:15px;
-    border:1px solid #d1d5db;
+    padding:12px;
+    margin:10px 0;
     border-radius:8px;
-    font-size:15px;
+    border:1px solid #ccc;
 }
 
 button{
     width:100%;
-    padding:14px;
+    padding:12px;
     border:none;
     border-radius:8px;
     background:#2563eb;
     color:white;
-    font-size:16px;
     cursor:pointer;
-    transition:0.3s;
 }
 
-button:hover{
-    background:#1d4ed8;
-}
-
-.register-link{
-    margin-top:18px;
+a{
     display:block;
-    color:#2563eb;
-    text-decoration:none;
+    margin-top:15px;
 }
 
-.register-link:hover{
-    text-decoration:underline;
-}
 </style>
 </head>
 
@@ -79,7 +55,7 @@ button:hover{
 
 <div class="container">
 
-    <h1>Log In</h1>
+    <h1>Login</h1>
 
     <input
         type="email"
@@ -97,16 +73,14 @@ button:hover{
         Log-in
     </button>
 
-    <a
-        class="register-link"
-        href="register.html"
-    >
+    <a href="register.html">
         Register
     </a>
 
 </div>
 
-<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<!-- SUPABASE CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
@@ -117,8 +91,9 @@ const supabaseKey =
 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxnZXp2ZWxleGNvaW5jb3lmemhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2NTk1NDQsImV4cCI6MjA5NDIzNTU0NH0.nppfcWnBeKguSGGNfq3ZBWgHp6P1r-ztuze2xlaCpas
 ";
 
+// IMPORTANT:
 const supabaseClient =
-supabase.createClient(
+window.supabase.createClient(
     supabaseUrl,
     supabaseKey
 );
@@ -134,8 +109,8 @@ async function login(){
     const { data, error } =
     await supabaseClient.auth.signInWithPassword({
 
-        email,
-        password
+        email: email,
+        password: password
     });
 
     if(error){
