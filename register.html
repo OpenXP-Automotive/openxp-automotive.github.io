@@ -120,7 +120,7 @@ async function register(){
     document.getElementById("password").value;
 
     const { data, error } =
-    await supabase.auth.signUp({
+    await supabaseClient.auth.signUp({
 
         email,
         password,
