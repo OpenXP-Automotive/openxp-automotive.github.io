@@ -106,16 +106,19 @@ button:hover{
 
 </div>
 
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
 <script>
 
 const supabaseUrl =
 "https://lgezvelexcoincoyfzhr.supabase.co";
 
 const supabaseKey =
-"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxnZXp2ZWxleGNvaW5jb3lmemhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2NTk1NDQsImV4cCI6MjA5NDIzNTU0NH0.nppfcWnBeKguSGGNfq3ZBWgHp6P1r-ztuze2xlaCpas";
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxnZXp2ZWxleGNvaW5jb3lmemhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2NTk1NDQsImV4cCI6MjA5NDIzNTU0NH0.nppfcWnBeKguSGGNfq3ZBWgHp6P1r-ztuze2xlaCpas
+";
 
 const supabaseClient =
-window.supabaseClient.createClient(
+supabase.createClient(
     supabaseUrl,
     supabaseKey
 );
@@ -130,6 +133,7 @@ async function login(){
 
     const { data, error } =
     await supabaseClient.auth.signInWithPassword({
+
         email,
         password
     });
@@ -137,27 +141,12 @@ async function login(){
     if(error){
 
         alert(error.message);
-
-        window.location.href =
-        "register.html";
-
         return;
     }
 
     window.location.href =
     "https://openxp-automotive.github.io/";
 }
-
-// Auto redirect if already logged in
-supabase.auth.getSession().then(
-({ data }) => {
-
-    if(data.session){
-
-        window.location.href =
-        "https://openxp-automotive.github.io/";
-    }
-});
 
 </script>
 
