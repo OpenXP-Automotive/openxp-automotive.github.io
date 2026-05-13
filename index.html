@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenXP Automotive</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#111827;
+    color:white;
+    font-family:Arial, sans-serif;
+}
+
+.container{
+    text-align:center;
+}
+
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    background:#dc2626;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Welcome to OpenXP Automotive</h1>
+
+    <p id="userInfo"></p>
+
+    <button onclick="logout()">
+        Logout
+    </button>
+
+</div>
+
+<script>
+
+const supabaseUrl =
+"https://lgezvelexcoincoyfzhr.supabase.co";
+
+const supabaseKey =
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxnZXp2ZWxleGNvaW5jb3lmemhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2NTk1NDQsImV4cCI6MjA5NDIzNTU0NH0.nppfcWnBeKguSGGNfq3ZBWgHp6P1r-ztuze2xlaCpas";
+
+const supabase =
+window.supabase.createClient(
+    supabaseUrl,
+    supabaseKey
+);
+
+async function checkUser(){
+
+    const { data } =
+    await supabase.auth.getUser();
+
+    if(!data.user){
+
+        window.location.href =
+        "login.html";
+
+        return;
+    }
+
+    document.getElementById("userInfo")
+    .innerText =
+    "Logged in as: " +
+    data.user.email;
+}
+
+async function logout(){
+
+    await supabase.auth.signOut();
+
+    window.location.href =
+    "login.html";
+}
+
+checkUser();
+
+</script>
+
+</body>
+</html>
