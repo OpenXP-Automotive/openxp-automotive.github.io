@@ -115,7 +115,7 @@ const supabaseKey =
 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxnZXp2ZWxleGNvaW5jb3lmemhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2NTk1NDQsImV4cCI6MjA5NDIzNTU0NH0.nppfcWnBeKguSGGNfq3ZBWgHp6P1r-ztuze2xlaCpas";
 
 const supabaseClient =
-window.supabase.createClient(
+window.supabaseClient.createClient(
     supabaseUrl,
     supabaseKey
 );
@@ -129,7 +129,7 @@ async function login(){
     document.getElementById("password").value;
 
     const { data, error } =
-    await supabase.auth.signInWithPassword({
+    await supabaseClient.auth.signInWithPassword({
         email,
         password
     });
